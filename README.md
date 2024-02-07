@@ -1,8 +1,8 @@
 # grizli visual tool
 ## Requirement:
 - python 
-- X11 version of [ds9]{https://sites.google.com/cfa.harvard.edu/saoimageds9/download?authuser=0} and [X11]{https://www.xquartz.org/}. Then add ds9 path to zshrc or bash script. This is the one we found ususally works with pyds9. 
-- [pyds9]{https://github.com/ericmandel/pyds9}
+- X11 version of [ds9](https://sites.google.com/cfa.harvard.edu/saoimageds9/download?authuser=0) and [X11](https://www.xquartz.org/). Then add ds9 path to zshrc or bash script. This is the one we found ususally works with pyds9. 
+- [pyds9](https://github.com/ericmandel/pyds9)
 
 ## To run:
 ```
