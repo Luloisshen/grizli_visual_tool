@@ -757,7 +757,7 @@ else:
 ### check all files exist:    
 check_files = 0
 for i in range(len(tab1)):
-    id_i =  name = 'ngdeep_'+str(int(tab1.loc[i, 'ID'])).zfill(5)
+    id_i = tab1.loc[i, 'grizli_ID']
     # peak = id_i.split("_")[1]
     files = [".stack.fits", ".1D.fits", ".full.png", ".sed.png", ".stack.png"]
     for f in files:
@@ -773,7 +773,7 @@ np.savetxt('.exit_tmp', [0]) # init a tmp file to store GUI exit: exit = 1, next
 
 for i in range(n0, len(tab1)):
     
-    id_i, mag_i =  'ngdeep_'+str(int(tab1.loc[i, 'ID'])).zfill(5), tab1.loc[i, 'MAG']#.split("_")
+    id_i, mag_i =  tab1.loc[i, 'grizli_ID'], tab1.loc[i, 'MAG']#.split("_")
     # peak = id_i.split("_")[1]
     # PATH_table = file_path +'/' 
         
@@ -871,7 +871,7 @@ for i in range(n0, len(tab1)):
         
         for ff in glob.glob(PATH_table+"*.reg"):
             os.remove(ff)
-        for ff in glob.glob(PATH_table+"*_modelsub.fits"):
+        for ff in glob.glob(PATH_table+"*_modelsub*.fits"):
             os.remove(ff)
         print("remove all middle stage files") 
         break
@@ -881,6 +881,6 @@ print("Save to " + inputfile[:-4]+'.addflags.cat')
 
 for ff in glob.glob(PATH_table+"*.reg"):
     os.remove(ff)
-for ff in glob.glob(PATH_table+"*_modelsub.fits"):
+for ff in glob.glob(PATH_table+"*_modelsub*.fits"):
     os.remove(ff)
 print("remove all middle stage files")
