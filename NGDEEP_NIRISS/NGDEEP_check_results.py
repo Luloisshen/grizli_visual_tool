@@ -773,7 +773,7 @@ np.savetxt('.exit_tmp', [0]) # init a tmp file to store GUI exit: exit = 1, next
 
 for i in range(n0, len(tab1)):
     
-    id_i, mag_i =  'ngdeep_'+str(int(tab1.loc[i, 'ID'])).zfill(5), tab1.loc[i, 'FLUX_F150W']#.split("_")
+    id_i, mag_i =  'ngdeep_'+str(int(tab1.loc[i, 'ID'])).zfill(5), tab1.loc[i, 'MAG']#.split("_")
     # peak = id_i.split("_")[1]
     # PATH_table = file_path +'/' 
         
@@ -782,7 +782,7 @@ for i in range(n0, len(tab1)):
         if id_i not in id_list:
             continue
 
-    z_list = [tab1.loc[i, 'REDSHIFT'], tab1.loc[i, 'ZA']] #, tab1.loc[i, 'z_spec']]
+    z_list = [tab1.loc[i, 'z_grizli'], tab1.loc[i, 'z_phot']] #, tab1.loc[i, 'z_spec']]
     z_list_label = ["zgrism",  'zphot'] #, 'zspec'
     z_list_color = ["green", 'orange'] #, 'red'
     
