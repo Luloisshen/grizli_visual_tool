@@ -21,7 +21,7 @@ For example:
   ```
 - Checking with object id:
   ```
-  python check_results.py -i beta_test/beta_test.cat -l '["ngdeep_13353","ngdeep_09985"]'
+  python check_results.py -i beta_test/beta_test.cat -l '["ngdeep_00001","ngdeep_00002"]'
   ```
   If both "start number" and "grizli id list" are given, "grizli id list" will be used. The input flags and comments will save in every 2 objects to the save input file. This is to prevent loss due to exit for any unknown reason. If the code exit itself, you can re-start 2 objects before the object you were working on to check. 
 
