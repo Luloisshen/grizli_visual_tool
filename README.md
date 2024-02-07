@@ -57,9 +57,9 @@ For example:
 
 ## To setup your own catalog:
 - Required catalog columns:
-  - 'ID': this is the same as ID of field. For example, 'ngdeep_00001';
+  - 'grizli_ID': this is the same as ID of field. For example, 'ngdeep_00001';
   - 'MAG': the magnitude of object. For example, for ngdeep, we use F150W band; 
-  - 'grizli_z': Grizli fitted redshift;
+  - 'z_grizli': Grizli fitted redshift;
   - 'z_phot': photometry redshift from pure photometry data. 
 - Required files are .sed.png, .stack.png, .stack.fits, .full.png and .1D.fits
 
