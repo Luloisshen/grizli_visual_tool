@@ -391,7 +391,7 @@ def Make_Gui2(grizli_id, exist_flags, progress, oned, mag, z=[0, 0], path="Extra
         exist_flags = [-1,-1,-1, '', 0, '']
 
     root = tk.Tk()
-    root.geometry('1380x800')
+    root.geometry('1420x820')
     root.title("Main window")
     OPTIONS = ["    ", "Great", "Good", "Unclear", "Bad"]
     
@@ -402,17 +402,17 @@ def Make_Gui2(grizli_id, exist_flags, progress, oned, mag, z=[0, 0], path="Extra
     frame2.grid(column = 0, row = 1, columnspan = 1, sticky = tk.W+tk.E, padx=(10, 0))
     frame22 = tk.Frame(root)
     frame22.grid(column = 1, row = 1, columnspan = 1, sticky = tk.W+tk.E, padx=0)
-    frame3 = tk.Frame(root)
-    frame3.grid(column = 0, row = 2, columnspan = 2, sticky = tk.W+tk.E, padx=(10, 0))
     frame4 = tk.Frame(root)
-    frame4.grid(column = 0, row = 3, columnspan = 2, sticky = tk.W+tk.E, padx=(10, 0), pady=(10, 40))
+    frame4.grid(column = 0, row = 2, columnspan = 2, sticky = tk.W+tk.E, padx=(10, 0), pady=(0, 0))
+    frame3 = tk.Frame(root)
+    frame3.grid(column = 0, row = 3, columnspan = 2, sticky = tk.W+tk.E, padx=(10, 0), pady=(0, 20))
     
     frame5 = tk.Frame(root)
     frame5.grid(column = 2, row = 0) #, sticky = tk.W+tk.E)
     frame6 = tk.Frame(root)
-    frame6.grid(column = 2, row = 1)#, columnspan = 4, sticky = tk.W+tk.E)
+    frame6.grid(column = 2, row = 1, rowspan = 2, sticky = tk.S+tk.N)#, columnspan = 4, sticky = tk.W+tk.E)
     frame7 = tk.Frame(root)
-    frame7.grid(column = 2, row = 2, rowspan = 2, sticky = tk.S+tk.N)
+    frame7.grid(column = 2, row = 3)
     
     label = tk.Label(frame1, text='Checking N = %i (total %i): \n'%(progress[0], progress[1]) 
                      + 'Grizli id: ' + grizli_id 
@@ -438,6 +438,11 @@ def Make_Gui2(grizli_id, exist_flags, progress, oned, mag, z=[0, 0], path="Extra
     var0.set(OPTIONS[int(exist_flags[0]+1)])
     w0 = tk.OptionMenu(frame22, var0, *OPTIONS)
     w0.pack(anchor=tk.W)
+    
+    root.bind('1', lambda event: var0.set(OPTIONS[1]))
+    root.bind('2', lambda event: var0.set(OPTIONS[2]))
+    root.bind('3', lambda event: var0.set(OPTIONS[3]))
+    root.bind('4', lambda event: var0.set(OPTIONS[4]))
 
     label = tk.Label(frame2, text='spectra fitting:', font=fnt.Font(size = 16), anchor="w", justify="left")
     label.pack(anchor=tk.W)
@@ -447,6 +452,11 @@ def Make_Gui2(grizli_id, exist_flags, progress, oned, mag, z=[0, 0], path="Extra
     w1 = tk.OptionMenu(frame22, var1, *OPTIONS)
     w1.pack(anchor=tk.W)
     
+    root.bind('q', lambda event: var1.set(OPTIONS[1]))
+    root.bind('w', lambda event: var1.set(OPTIONS[2]))
+    root.bind('e', lambda event: var1.set(OPTIONS[3]))
+    root.bind('r', lambda event: var1.set(OPTIONS[4]))
+    
     label = tk.Label(frame2, text='phot fitting:', font=fnt.Font(size = 16), anchor="w", justify="left")
     label.pack(anchor=tk.W)
     
@@ -454,6 +464,11 @@ def Make_Gui2(grizli_id, exist_flags, progress, oned, mag, z=[0, 0], path="Extra
     var2.set(OPTIONS[int(exist_flags[2]+1)])
     w2 = tk.OptionMenu(frame22, var2, *OPTIONS)
     w2.pack(anchor=tk.W)
+    
+    root.bind('a', lambda event: var2.set(OPTIONS[1]))
+    root.bind('s', lambda event: var2.set(OPTIONS[2]))
+    root.bind('d', lambda event: var2.set(OPTIONS[3]))
+    root.bind('f', lambda event: var2.set(OPTIONS[4]))
     
     # label = tk.Label(frame2, text='spec+phot fitting:', font=fnt.Font(size = 16), anchor="w", justify="left")
     # label.pack(anchor=tk.W)
@@ -483,7 +498,7 @@ def Make_Gui2(grizli_id, exist_flags, progress, oned, mag, z=[0, 0], path="Extra
     chk1.pack(anchor=tk.W)
     
     varr2 = tk.IntVar()
-    chk2 = tk.Checkbutton(frame3, text=u'portion of spectrum [\u03bbobs1 \u03bbobs2 in \u03bcm]',  font=fnt.Font(size = 16), variable=varr2)
+    chk2 = tk.Checkbutton(frame3, text=u'mask portion of spectra[\u03bbobs1 \u03bbobs2 in \u03bcm]',  font=fnt.Font(size = 16), variable=varr2)
     if exist_flags[4]//1000 == 1:
         chk2.select()
         exist_flags[4] = exist_flags[4]-1000
@@ -522,16 +537,25 @@ def Make_Gui2(grizli_id, exist_flags, progress, oned, mag, z=[0, 0], path="Extra
     def Close(): 
         np.savetxt('.exit_tmp', [1])
         root.destroy() 
+    def Close_(event): 
+        np.savetxt('.exit_tmp', [1])
+        root.destroy() 
         
     def Next(): 
         np.savetxt('.exit_tmp', [0])
         root.destroy() 
         
+    def Next_(event): 
+        np.savetxt('.exit_tmp', [0])
+        root.destroy() 
+        
     next_button = tk.Button(frame4, text="Next", command=Next,  font=fnt.Font(size=22), fg='RoyalBlue')  #command=lambda m="It is an apple": which_button(m)
     next_button.pack(side='left')
+    root.bind("<Return>", Next_)
+    
     exit_button = tk.Button(frame4, text="Exit", command=Close, font=fnt.Font(size=22), fg='RoyalBlue')  #command=lambda m="It is an apple": which_button(m)
     exit_button.pack(side='left')
-    
+    root.bind("<Escape>", Close_)
     ###
     
     #path_img = path+"%s.%s.png"%(grizli_id, 'full')
@@ -539,16 +563,16 @@ def Make_Gui2(grizli_id, exist_flags, progress, oned, mag, z=[0, 0], path="Extra
     #tk.Label(frame5, image=img2).pack(side='left')
 
     path_img = path+"%s.%s.png"%(grizli_id, 'stack')
-    img3 = ImageTk.PhotoImage(Image.open(path_img).resize((1000, 200)))
+    img3 = ImageTk.PhotoImage(Image.open(path_img).resize((1000, 300)))
     #print(img3.width(), img3.height())
     tk.Label(frame5, image=img3).pack(anchor = "w", side = "bottom")
 
     path_img = path+"%s.%s.png"%(grizli_id, 'sed')
-    img1 = ImageTk.PhotoImage(Image.open(path_img).crop([0, 0, 780, 300]))
+    img1 = ImageTk.PhotoImage(Image.open(path_img).crop([0, 0, 780, 300]).resize((650, 250)))
     tk.Label(frame6, image=img1).pack(anchor = "w", side = "bottom")
     
     path_img = path+"%s.%s.png"%(grizli_id, 'full')
-    img2 = ImageTk.PhotoImage(Image.open(path_img).resize((1000, 300)))
+    img2 = ImageTk.PhotoImage(Image.open(path_img).resize((833, 250)))
     tk.Label(frame7, image=img2).pack(anchor = "w", side = "bottom")
     
     # Add information about wavelengths of strong features 
@@ -663,7 +687,16 @@ def get_modelsub(stack_path):
     remove_list = ['CTYPE1', 'CTYPE2', 'CUNIT1', 'CUNIT2']
     for i in range(1, len(hdu)):
         if (hdu[i].header['EXTNAME'] == 'SCI'):
-            if (hdu[i].header['GRISM'] == 'F115W'):
+            if (hdu[i].header['GRISM'] == 'F115W') & ('PA' in hdu[i].header):
+                modelsub_115.append(hdu[i].copy())
+                tmp = hdu[i].copy()
+                tmp.data = hdu[i].data - hdu[i+3].data
+                tmp.header['EXTNAME'] = 'MODELSUB'
+                for l in remove_list:
+                    if l in tmp.header:
+                        del tmp.header[l]
+                modelsub_115.append(tmp)
+            if (hdu[i].header['GRISM'] == 'F115W') & ('PA' not in hdu[i].header):
                 modelsub_115.append(hdu[i].copy())
                 tmp = hdu[i].copy()
                 tmp.data = hdu[i].data - hdu[i+2].data
@@ -672,7 +705,17 @@ def get_modelsub(stack_path):
                     if l in tmp.header:
                         del tmp.header[l]
                 modelsub_115.append(tmp)
-            elif (hdu[i].header['GRISM'] == 'F150W'):
+                
+            elif (hdu[i].header['GRISM'] == 'F150W') & ('PA' in hdu[i].header):
+                modelsub_150.append(hdu[i].copy())
+                tmp = hdu[i].copy()
+                tmp.data = hdu[i].data - hdu[i+3].data
+                tmp.header['EXTNAME'] = 'MODELSUB'
+                for l in remove_list:
+                    if l in tmp.header:
+                        del tmp.header[l]
+                modelsub_150.append(tmp)   
+            elif (hdu[i].header['GRISM'] == 'F150W') & ('PA' not in hdu[i].header):
                 modelsub_150.append(hdu[i].copy())
                 tmp = hdu[i].copy()
                 tmp.data = hdu[i].data - hdu[i+2].data
@@ -681,7 +724,17 @@ def get_modelsub(stack_path):
                     if l in tmp.header:
                         del tmp.header[l]
                 modelsub_150.append(tmp)   
-            elif (hdu[i].header['GRISM'] == 'F200W'):
+                
+            elif (hdu[i].header['GRISM'] == 'F200W') & ('PA' in hdu[i].header):
+                modelsub_200.append(hdu[i].copy())
+                tmp = hdu[i].copy()
+                tmp.data = hdu[i].data - hdu[i+3].data
+                tmp.header['EXTNAME'] = 'MODELSUB'
+                for l in remove_list:
+                    if l in tmp.header:
+                        del tmp.header[l]
+                modelsub_200.append(tmp)
+            elif (hdu[i].header['GRISM'] == 'F200W') & ('PA' not in hdu[i].header):
                 modelsub_200.append(hdu[i].copy())
                 tmp = hdu[i].copy()
                 tmp.data = hdu[i].data - hdu[i+2].data
