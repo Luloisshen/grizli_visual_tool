@@ -37,14 +37,14 @@ For example:
   - Even if there is contamination near the extraction window in the 2d spectrum, as long as it is not spatially coincident with the extraction window (or at the very edge where it is severely downweighted), it is fine. Can mark “co” (contamination offset from window) in the comments in this case. If there is contamination within the extraction window, mark “cw” (contamination in the window) in the comment. 
 
 - 'spectra_fitting_flag':
-  - "Great": spectrum continuum and emission lines are perfectly fitted and there is at least one clear feature fit; 
-  - "Good": a good fit (1) two possible emission features are fitted, but a high S/N continuum is present and is clearly not fit well. (2) a single feature is fit well and it's pretty clear the redshift is correct, but there appears other features in the grism spectra that may be real or continuum is not fitted or artifacts that are not accounted for or not accounted for well (3) a continuum only fit when no strong emission lines are expected (these are Ha, OIII, Hb, OII in some cases, PaB in some cases) either due to the rest-frame coverage of the grism or a red template fit ;
+  - "Great": spectrum continuum and emission lines are perfectly fitted and there is at least two clear features fit. Features including emission lines, Balmer break at rest-frame 0.3645 um, and Balmer absorption lines (Ha, Hb, Hg, Hd); 
+  - "Good": a good fit (1) two possible emission features are fitted, but either a low S/N continuum is present or the high S/N continuum is not fit well. (2) a single feature fits well and it's pretty clear the redshift is correct, but there appear other features in the grism spectra that may be real or continuum is not fitted or artifacts that are not accounted for or not accounted for well (3) a continuum only fit when no strong emission lines are expected (these are Ha, OIII, Hb, OII in some cases, PaB in some cases) either due to the rest-frame coverage of the grism or a red template fit;
   - "Unclear" (1) only a continuum without features is fit and fit well, but it’s unclear whether emission features should be present, or (2) very noisy spectra fall in this category as well (as long as the model isn’t terribly off). 
   - "Bad": emission lines and/or continuum obviously wrong. 
 
 - 'phot_fitting_flag': flag on the SED photometric fit.
-  - "Great": photometric data (black dots) are perfectly fitted (within normal scatter and any issues with F814W, see below).
-  - "Good": Some photometric data points are significantly off (larger than data errorbar) from the fitted SED model, more than may be expected from typical Gaussian random errors. Note that F814W is off in some cases, because F814W is not extracted the same way as other photometric data.
+  - "Great": photometric data (black dots) are perfectly fitted by the red line and red dots.
+  - "Good": Some photometric data points are significantly off (larger than data errorbar) from the fitted SED model, but the overall shape of the model fits the overall shape of photometric data.
   - "Unclear": cannot see the fitting result due to large errorbars in the spectra OR you think there may be another fit that might work equally well;
   - "Bad": obviously wrong, a majority of the photometric data is off from the fitted SED model;
 
